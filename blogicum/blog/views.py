@@ -1,5 +1,6 @@
 """Логика для постов и главной страницы."""
 from django.shortcuts import render
+from django.http import Http404
 
 
 posts = [
@@ -52,10 +53,14 @@ def index(request):
     return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, id):
+def post_detail(request, post_id):
     """Страница с полным текстом поста."""
-    context = {'post': posts[id]}
-    return render(request, 'blog/detail.html', context)
+    for i in posts:
+        try:
+            context = {'post': posts[post_id]}
+        except IndexError:
+            raise Http404("Такого id не существует")
+        return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):

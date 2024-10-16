@@ -1,7 +1,5 @@
+"""Логика для постов и главной страницы."""
 from django.shortcuts import render
-from django.http import HttpResponse
-
-# Create your views here.
 
 
 posts = [
@@ -49,16 +47,18 @@ posts = [
 
 
 def index(request):
+    """Главная страница."""
     context = {'posts': list(reversed(posts))}
     return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, id='/'):
+def post_detail(request, id):
+    """Страница с полным текстом поста."""
     context = {'post': posts[id]}
     return render(request, 'blog/detail.html', context)
-    
 
 
 def category_posts(request, category_slug):
+    """Страница с категорией поста."""
     context = {'category_slug': category_slug}
     return render(request, 'blog/category.html', context)

@@ -55,12 +55,11 @@ def index(request):
 
 def post_detail(request, post_id):
     """Страница с полным текстом поста."""
-    for i in posts:
-        try:
-            context = {'post': posts[post_id]}
-        except IndexError:
-            raise Http404("Такого id не существует")
-        return render(request, 'blog/detail.html', context)
+    try:
+        context = {'post': posts[post_id]}
+    except IndexError:
+        raise Http404('Такого id не существует')
+    return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):

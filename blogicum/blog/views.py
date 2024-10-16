@@ -1,5 +1,5 @@
 """Логика для постов и главной страницы."""
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 
 
@@ -56,7 +56,9 @@ def index(request):
 def post_detail(request, post_id):
     """Страница с полным текстом поста."""
     try:
-        context = {'post': posts[post_id]}
+        for post in posts:
+            if post['id'] == post_id:
+                context = {'post': post}
     except IndexError:
         raise Http404('Такого id не существует')
     return render(request, 'blog/detail.html', context)

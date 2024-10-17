@@ -60,7 +60,7 @@ def post_detail(request, post_id):
         if post['id'] == post_id:
             context = {'post': post}
             break
-    if post == None:
+    if post is None:
         raise Http404('Такого id не существует')
     return render(request, 'blog/detail.html', context)
 

@@ -62,7 +62,7 @@ def post_detail(request, post_id):
             break
     if context is None:
         raise Http404('Такого id не существует')
-    return render(request, 'blog/detail.html', context) 
+    return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):

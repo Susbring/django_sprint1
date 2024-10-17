@@ -1,6 +1,5 @@
 """URL для about и rules."""
 from django.urls import path
-
 from . import views
 
 
